@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% set back_url = url_for('index') %}
+{% block title %}Все 6 месяцев вместе{% endblock %}
+{% block page_class %}page-2{% endblock %}
+
+{% block content %}
+<header class="page-heading">
+    <p class="eyebrow">06.04.2026 → сейчас</p>
+    <h1>Все 6 месяцев вместе</h1>
+    <p>Нажимай на каждую фотографию, а потом открывай её описание.</p>
+</header>
+
+<section class="memory-feed" id="memoryFeed">
+    {% for item in memories %}
+    <article class="memory-card" data-memory-id="{{ loop.index0 }}">
+        <button class="media-tap" type="button" aria-label="Открыть действия для {{ item.title }}">
+            <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.title }}">
+            <span class="tap-label">Нажми на фото</span>
+            <span class="read-badge" aria-hidden="true">✓ прочитано</span>
+        </button>
+
+        <div class="memory-actions" hidden>
+            <button class="secondary-button show-description" type="button">Посмотреть описание</button>
+        </div>
+
+        <div class="memory-description" hidden>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+
+<section class="page-end-gate">
+    <p id="readHint" class="gate-hint">Нажми на фотографию и прочитай описание.</p>
+    <button
+        id="sixMonthsNext"
+        class="primary-button"
+        type="button"
+        data-next-url="{{ url_for('best_moments') }}"
+        disabled
+    >Далее →</button>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/six_months.js') }}"></script>
+{% endblock %}

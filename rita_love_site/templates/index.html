@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Поздравляю нас с шестью месяцами{% endblock %}
+{% block page_class %}page-1{% endblock %}
+{% block back_button %}{% endblock %}
+
+{% block content %}
+<section class="cover-section">
+    <div class="cover-photo-wrap">
+        <img class="cover-photo" src="{{ url_for('static', filename=site.cover_image) }}" alt="Наша фотография">
+        <span class="cover-glow"></span>
+    </div>
+
+    <div class="cover-title-row">
+        <h1>Поздравляю нас с шестью месяцами</h1>
+        <span class="animated-heart" aria-label="сердечко">❤</span>
+    </div>
+
+    <p class="cover-subtitle">Маленькое место в интернете только про нас.</p>
+
+    <a class="primary-button large-button" href="{{ url_for('six_months') }}">
+        только для Риточки
+    </a>
+</section>
+{% endblock %}

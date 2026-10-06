@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% set back_url = url_for('letter') %}
+{% block title %}50 маленьких причин{% endblock %}
+{% block page_class %}page-6{% endblock %}
+
+{% block content %}
+<header class="page-heading compact-heading">
+    <h1>50 маленьких причин, почему ты особенная для меня</h1>
+    <p>Нажми на коробочку.</p>
+</header>
+
+<section class="gift-stage" id="giftStage">
+    <button class="gift-button" id="giftBox" type="button" aria-label="Открыть подарок">
+        <span class="gift-lid">
+            <span class="bow bow-left"></span>
+            <span class="bow bow-right"></span>
+            <span class="bow-knot"></span>
+        </span>
+        <span class="gift-body"></span>
+        <span class="gift-ribbon-vertical"></span>
+        <span class="gift-ribbon-horizontal"></span>
+    </button>
+
+    <div class="reason-note" id="reasonNote" hidden>
+        <span class="reason-number" id="reasonNumber"></span>
+        <p id="reasonText"></p>
+    </div>
+
+    <button class="secondary-button" id="nextReason" type="button" hidden>Ещё одну</button>
+
+    <div class="reasons-finish" id="reasonsFinish" hidden>
+        <p>Ты открыла все 50, но это далеко не всё, за что я тебя люблю.</p>
+        <a class="primary-button" href="{{ url_for('secret') }}">Далее →</a>
+    </div>
+</section>
+
+<script id="reasonsData" type="application/json">{{ reasons | tojson }}</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/reasons.js') }}"></script>
+{% endblock %}

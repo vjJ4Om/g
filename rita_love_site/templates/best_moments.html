@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% set back_url = url_for('six_months') %}
+{% block title %}Наши лучшие моменты{% endblock %}
+{% block page_class %}page-3{% endblock %}
+
+{% block content %}
+<header class="page-heading">
+    <p class="eyebrow">то, что хочется пересматривать</p>
+    <h1>Наши лучшие моменты</h1>
+    <p>Здесь можно смешивать фотографии и видео.</p>
+</header>
+
+<section class="moment-grid">
+    {% for item in moments %}
+    <article class="moment-card">
+        <div class="moment-media" tabindex="0" role="button" aria-label="Показать кнопку описания">
+            {% if item.type == 'video' %}
+                <video controls playsinline preload="metadata" {% if item.poster %}poster="{{ url_for('static', filename=item.poster) }}"{% endif %}>
+                    <source src="{{ url_for('static', filename=item.src) }}" type="video/mp4">
+                    Твой браузер не поддерживает видео.
+                </video>
+            {% else %}
+                <img src="{{ url_for('static', filename=item.src) }}" alt="{{ item.title }}">
+            {% endif %}
+            <span class="moment-overlay">Нажми, чтобы открыть описание</span>
+        </div>
+
+        <button class="secondary-button moment-description-button" type="button" hidden>
+            Посмотреть описание
+        </button>
+
+        <div class="moment-description" hidden>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+
+<div class="center-actions">
+    <a class="primary-button" href="{{ url_for('timer_page') }}">Далее →</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/best_moments.js') }}"></script>
+{% endblock %}

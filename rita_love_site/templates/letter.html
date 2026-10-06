@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% set back_url = url_for('timer_page') %}
+{% block title %}Письмо для Риточки{% endblock %}
+{% block page_class %}page-5{% endblock %}
+
+{% block content %}
+<section class="letter-stage">
+    <div class="notebook-paper">
+        <span class="paper-tape tape-left"></span>
+        <span class="paper-tape tape-right"></span>
+        {% for paragraph in paragraphs %}
+            <p>{{ paragraph }}</p>
+        {% endfor %}
+    </div>
+
+    <a class="primary-button" href="{{ url_for('reasons') }}">Далее →</a>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% set back_url = url_for('best_moments') %}
+{% block title %}Наше время{% endblock %}
+{% block page_class %}page-4{% endblock %}
+
+{% block content %}
+<section class="time-stage" data-start-date="{{ site.relationship_start }}">
+    <div class="analog-clock" aria-label="Текущее время">
+        <div class="clock-face">
+            {% for n in range(1, 13) %}
+                <span class="clock-number n{{ n }}">{{ n }}</span>
+            {% endfor %}
+            <div class="hand hour-hand" id="hourHand"></div>
+            <div class="hand minute-hand" id="minuteHand"></div>
+            <div class="hand second-hand" id="secondHand"></div>
+            <div class="clock-pin"></div>
+        </div>
+    </div>
+
+    <div class="relationship-counter-wrap">
+        <p class="relationship-label">Мы вместе уже:</p>
+        <div class="relationship-counter" id="relationshipCounter">
+            <div class="time-unit"><span id="years">0</span><small>год</small></div>
+            <div class="time-unit"><span id="months">0</span><small>месяц</small></div>
+            <div class="time-unit"><span id="days">0</span><small>день</small></div>
+            <div class="time-unit"><span id="hours">0</span><small>час</small></div>
+            <div class="time-unit"><span id="minutes">0</span><small>минута</small></div>
+            <div class="time-unit"><span id="seconds">0</span><small>секунда</small></div>
+        </div>
+    </div>
+
+    <p class="timer-note">скоро раздел «год» тоже будет заполнен</p>
+
+    <a class="primary-button" href="{{ url_for('letter') }}">Далее →</a>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+{% endblock %}
